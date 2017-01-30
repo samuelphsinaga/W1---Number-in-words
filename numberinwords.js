@@ -1,155 +1,37 @@
-function in_words(angka) {
+var words = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas", "duabelas", "tigabelas", "empatbelas", "limabelas", "enambelas", "tujuhbelas", "delapanbelas", "sembilanbelas"]
 
-  var len = angka.toString().length;
-  var arr = angka.toString().split("");
-  var result = [];
-  var compare = ['DUA','TIGA','EMPAT','LIMA','ENAM','TUJUH','DELAPAN','SEMBILAN'];
+function in_words(angka, result = ""){
 
-  if(arr[0] === "1")
-     {
-       result.push("SERATUS");
-     }
+if(angka.toString().length == 4){
+     let firstChar = angka.toString()[0]
+     result += words[firstChar]
+     result += " ribu "
+     angka = angka - (firstChar * 1000)
+     return in_words(angka,result)
+  }else if(angka.toString().length == 3){
+    let firstChar = angka.toString()[0]
+    result += words[firstChar]
+    result += " ratus "
+    angka = angka - (firstChar * 100)
+    return in_words(angka,result)
+  } else if(angka.toString().length == 2){
+    if(angka < 20 && angka > 10){
+      return result += words[angka]
+    }
+    let firstChar = angka.toString()[0]
+    result += words[firstChar]
+    result += " puluh "
+    angka = angka - (firstChar * 10)
+    return in_words(angka, result)
+  } else {
+    result += words[angka]
+  }
 
-   for(var x = 0; x < len;x++)
-     {
+  return result
 
-
-       if(arr[x] === "2")
-         {
-           result.push("DUA");
-
-           if(x == 0)
-             {
-               result.push("RATUS");
-             }
-
-           if(x == 1)
-             {
-               result.push("PULUH");
-             }
-         }
-
-       if(arr[x] === "3")
-         {
-           result.push("TIGA");
-
-           if(x == 0)
-             {
-               result.push("RATUS");
-             }
-
-           if(x == 1)
-             {
-               result.push("PULUH");
-             }
-         }
-       if(arr[x] === "4")
-         {
-           result.push("EMPAT");
-
-           if(x == 0)
-             {
-               result.push("RATUS");
-             }
-
-           if(x == 1)
-             {
-               result.push("PULUH");
-             }
-         }
-       if(arr[x] === "5")
-         {
-           result.push("LIMA");
-
-           if(x == 0)
-             {
-               result.push("RATUS");
-             }
-
-           if(x == 1)
-             {
-               result.push("PULUH");
-             }
-         }
-       if(arr[x] === "6")
-         {
-           result.push("ENAM");
-
-           if(x == 0)
-             {
-               result.push("RATUS");
-             }
-
-           if(x == 1)
-             {
-               result.push("PULUH");
-             }
-         }
-       if(arr[x] === "7")
-         {
-           result.push("TUJUH");
-
-           if(x == 0)
-             {
-               result.push("RATUS");
-             }
-
-           if(x == 1)
-             {
-               result.push("PULUH");
-             }
-         }
-       if(arr[x] === "8")
-         {
-           result.push("DELAPAN");
-
-           if(x == 0)
-             {
-               result.push("RATUS");
-             }
-
-           if(x == 1)
-             {
-               result.push("PULUH");
-             }
-         }
-       if(arr[x] === "9")
-         {
-           result.push("SEMBILAN");
-
-           if(x == 0)
-             {
-               result.push("RATUS");
-             }
-
-           if(x == 1)
-             {
-               result.push("PULUH");
-             }
-         }
-
-     }
-
-    if(arr[1] == "1" && arr[2] > 1)
-     {
-       result.push("BELAS");
-     }
-   if(arr[1] === "1" && arr[2] === "0")
-     {
-       result.push("SEPULUH");
-     }
-
-   if(arr[1] === "1" && arr[2] === "1")
-     {
-       result.push("SEBELAS");
-     }
-   if(arr[2] === "1" && arr[1] !== "1")
-     {
-       result.push("SATU");
-     }
-  return result;
-  // Your code here
 }
-
-// Driver code
-console.log(in_words(491));
+console.log(in_words(3));
+console.log(in_words(32));
+console.log(in_words(919));
+console.log(in_words(3252));
+console.log(in_words(32501));
